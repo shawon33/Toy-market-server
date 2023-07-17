@@ -31,6 +31,7 @@ async function run() {
     await client.connect();
 
     const toyCollection = client.db("Toy-shop").collection("toys");
+
     const sellerCollection = client.db("Toy-shop").collection("sellerToys");
 
     //  get section all toys
@@ -62,11 +63,6 @@ async function run() {
 
 
     // post section
-    app.get("/toys", async (req, res) => {
-      const cursor = toyCollection.find();
-      const result = await cursor.toArray();
-      res.send(result);
-    });
 
     app.get("/sellerToys", async (req, res) => {
       console.log(req.query);
@@ -87,10 +83,6 @@ async function run() {
     });
 
 
-    // get new toy by using user from post
-
-    //   post new toy
-   
     // toy Update
     app.get("/sellerToys/:id", async (req, res) => {
       const id = req.params.id;
@@ -119,7 +111,8 @@ async function run() {
       res.send(result)
     });
 
-    // DeleteToy]
+    // DeleteToy
+
     app.delete("/sellerToys/:id", async (req, res) => {
       const id = req.params.id;
       const query = { _id: new ObjectId(id) };
