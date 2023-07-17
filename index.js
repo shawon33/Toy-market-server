@@ -92,6 +92,32 @@ async function run() {
     //   post new toy
    
     // toy Update
+    app.get("/sellerToys/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await sellerCollection.findOne(query);
+      res.send(result);
+    });
+
+    app.put("/sellerToys/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateToy = req.body;
+      const toy = {
+        $set: {
+          picture: updateToy.photo,
+          name: updateToy.name,
+          category: updateToy.subCategory,
+          price: updateToy.price,
+          details_description: updateToy.details,
+          available_quantity: updateToy.quantity,
+          rating: updateToy.rating,
+        },
+      };
+      const result = await sellerCollection.updateOne(query, toy, options);
+      res.send(result)
+    });
 
     // DeleteToy
   
