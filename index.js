@@ -68,6 +68,24 @@ async function run() {
       res.send(result);
     });
 
+    app.get("/sellerToys", async (req, res) => {
+      console.log(req.query);
+      let query = {};
+      if (req.query?.email) {
+        query = { email: req.query.email };
+      }
+      const result = await sellerCollection.find(query).toArray();
+      res.send(result);
+    });
+
+    //   post new toy
+    app.post("/sellerToys", async (req, res) => {
+      const toy = req.body;
+      console.log(toy);
+      const result = await sellerCollection.insertOne(toy);
+      res.send(result);
+    });
+
 
     // get new toy by using user from post
 
