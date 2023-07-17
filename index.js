@@ -43,6 +43,12 @@ async function run() {
 
 
     // post section
+    app.get("/toys", async (req, res) => {
+      const cursor = toyCollection.find();
+      const result = await cursor.toArray();
+      res.send(result);
+    });
+
 
     // get new toy by using user from post
 
