@@ -41,11 +41,12 @@ async function run() {
       const result = await cursor.toArray();
       res.send(result);
     });
+
     app.get("/sellerToys",async(req,res)=>{
       const cursor = sellerCollection.find();
       const result = await cursor.toArray()
       res.send(result)
-    })
+    });
 
     app.get("/sellerToys/:id", async (req, res) => {
       const id = req.params.id;
