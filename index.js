@@ -106,7 +106,7 @@ async function run() {
           details_description: updateToy.details,
           available_quantity: updateToy.quantity,
           rating: updateToy.rating,
-        },
+        }
       };
       const result = await sellerCollection.updateOne(query, toy, options);
       res.send(result)
